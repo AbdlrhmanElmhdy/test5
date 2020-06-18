@@ -27,6 +27,13 @@ from rest_framework.authtoken.models import Token
 from rest_framework import status
 from .models import Customer
 
+class HomePage(APIView):
+	def get(self, request):
+		content = {
+			'HomePage': 'Hello, World!',
+		}
+		return Response(content)
+
 class AuthVerification(APIView):
 	# authentication_classes = [SessionAuthentication, BasicAuthentication]
 	permission_classes = [IsAuthenticated]

@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0fy4o4jeb%814ckwc_j7orb(tzj!9hn(4vwh-8+cda9%b!7-7o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['34.65.250.155', '127.0.0.1', 'abdlrhmanelmhdy.me']
+ALLOWED_HOSTS = ['34.65.250.155', '127.0.0.1', 'abdlrhmanelmhdy.me', 'test-131072.oa.r.appspot.com', 'appspot.com', '10.172.0.12', '35.216.199.148']
 
 
 # Application definition
@@ -76,16 +76,32 @@ WSGI_APPLICATION = 'test5.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+PUBLICK_DATABASE_IP = '34.65.246.29'
+PRIVATE_DATABASE_IP = '10.56.237.4'
+
+# if os.getenv('GAE_APPLICATION', None):
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'test5',
         'USER': 'root',
         'PASSWORD': 'hymdek-4dohrU-carhys',
-        'HOST': '34.65.246.29' if DEBUG == True else '10.56.237.4',
-        'PORT': '3306',
+        # 'HOST': '/cloudsql/test-131072:europe-west6:test5',
+        'HOST': PRIVATE_DATABASE_IP,
+        # 'HOST': PUBLICK_DATABASE_IP if DEBUG == True else PRIVATE_DATABASE_IP,
     }
 }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'test5',
+#             'USER': 'root',
+#             'PASSWORD': 'hymdek-4dohrU-carhys',
+#             'HOST': '127.0.0.1',
+#             'PORT': '3306',
+#         }
+#     }
 
 
 # Password validation
@@ -125,6 +141,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

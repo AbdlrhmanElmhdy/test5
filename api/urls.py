@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import AuthVerification, CreateUser, CustomersList, UsersList
+from .views import AuthVerification, CreateUser, CustomersList, UsersList, HomePage
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
+  path('', HomePage.as_view()),
   path('AuthVerification/', AuthVerification.as_view()),
   path('CreateUser/', CreateUser.as_view()),
   path('api-token-auth/', obtain_auth_token),
